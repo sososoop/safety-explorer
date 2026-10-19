@@ -1,0 +1,620 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>재난 안전 탐험대 | 소소숲</title><meta name="description" content="안전안내문자(재난 문자) 읽기자료를 복습하는 학습게임"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#f1f8fc;color:#102A3A}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --sky:#E3F0FB; --sea:#EAF4FC; --paper:#FFFFFF;
+    --ink:#143040; --sub:#5B7585; --line:#CFE0EF;
+    --coral:#F2665A; --coral-soft:#FFE8E5;
+    --lemon:#F5B700; --lemon-soft:#FFF5CF;
+    --mint:#179E97;  --mint-soft:#DBF3F1;
+    --blue:#2E86C8;  --blue-soft:#DFEEFA;
+    --grape:#7E6CD6; --grape-soft:#EBE7FB;
+    --good:#179E97; --bad:#E0574B;
+    --display:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    --body:'Gowun Dodum','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{background:linear-gradient(180deg,var(--sky) 0%,var(--sea) 55%,#FFF9EA 100%) fixed;color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;word-break:keep-all;overflow-wrap:break-word;-webkit-tap-highlight-color:transparent;}
+  .wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:18px 40px;}
+  button{font:inherit;color:inherit;cursor:pointer;border:none;background:none;}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:14px;}
+  h1,h2,h3,.disp{font-family:var(--display);font-weight:400;letter-spacing:0.01em;text-wrap:balance;margin:0;}
+
+  .bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .bar .home{background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:6px 14px;font-family:var(--display);font-size:18px;}
+  .bar .spacer{flex:1;}
+  .stars{font-family:var(--display);font-size:20px;background:var(--lemon-soft);border:2px solid #F2DA86;border-radius:999px;padding:4px 14px;font-variant-numeric:tabular-nums;}
+  .sound{background:var(--paper);border:2px solid var(--line);border-radius:14px;width:46px;height:46px;font-size:20px;}
+
+  .hero{background:var(--paper);border:3px solid var(--line);border-radius:28px;padding:22px 22px 18px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;}
+  .hero .kick{font-family:var(--display);color:var(--coral);font-size:17px;}
+  .hero h1{font-size:clamp(28px,6vw,44px);line-height:1.15;}
+  .hero h1 span{color:var(--blue);}
+  .hero p{margin:6px 0 0;color:var(--sub);}
+  .hero-art{width:150px;height:130px;}
+
+  .trail{position:relative;margin-top:18px;display:grid;gap:14px;}
+  .trail::before{content:"";position:absolute;left:43px;top:30px;bottom:30px;width:8px;border-radius:8px;background:repeating-linear-gradient(180deg,#C2DDF0 0 14px,transparent 14px 24px);}
+  .stop{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:var(--paper);border:3px solid var(--line);border-radius:22px;padding:12px 16px 12px 12px;transition:transform .15s,border-color .15s;width:100%;}
+  .stop:hover{transform:translateY(-2px);border-color:var(--c);}
+  .stop .num{flex:0 0 auto;width:66px;height:66px;border-radius:50%;background:var(--cs);border:3px solid var(--c);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;color:var(--c);}
+  .stop.done .num{background:var(--c);color:#fff;}
+  .stop .txt{flex:1;min-width:0;}
+  .stop .t{font-family:var(--display);font-size:22px;}
+  .stop .d{color:var(--sub);font-size:16px;}
+  .stop .got{font-family:var(--display);font-size:17px;color:var(--sub);white-space:nowrap;}
+  .notebook-btn{margin-top:18px;width:100%;background:var(--ink);color:#fff;border-radius:20px;padding:16px;font-family:var(--display);font-size:22px;}
+
+  .board{background:var(--paper);border:3px solid var(--line);border-radius:28px;padding:20px 18px 22px;}
+  .stage-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .stage-head .tag{font-family:var(--display);color:#fff;background:var(--c);border-radius:12px;padding:2px 12px;font-size:17px;}
+  .stage-head h2{font-size:26px;}
+  .progress{display:flex;gap:6px;margin:10px 0 4px;}
+  .progress i{flex:1;height:10px;border-radius:10px;background:#E6F0F5;}
+  .progress i.on{background:var(--c);}
+  .ask{font-size:19px;margin:10px 0 14px;color:var(--sub);}
+  .ask b{color:var(--ink);}
+  .pic{display:flex;justify-content:center;margin:4px 0 6px;}
+  .pic svg{width:110px;height:110px;}
+
+  .means{background:var(--mint-soft);border:3px solid #AEE3DF;border-radius:18px;padding:14px 16px;font-size:20px;text-align:center;margin:6px 0 14px;line-height:1.5;}
+  .picklist{display:grid;gap:10px;}
+  .pickbtn{background:#FAFEFE;border:3px solid var(--line);border-radius:16px;padding:14px 16px;font-family:var(--display);font-size:23px;text-align:center;}
+  .pickbtn:hover{border-color:var(--c);}
+
+  .sentence{font-family:var(--display);font-size:clamp(21px,4.8vw,29px);text-align:center;margin:8px 0 14px;line-height:1.5;}
+  .sentence .blank{display:inline-block;min-width:3.4em;border-bottom:4px solid var(--c);color:var(--c);}
+  .pieces{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:64px;}
+  .piece{background:var(--paper);border:3px solid #B9D6E6;border-radius:16px;padding:10px 18px;font-family:var(--display);font-size:22px;box-shadow:0 3px 0 #B9D6E6;}
+  .piece:active{transform:translateY(2px);box-shadow:none;}
+
+  .slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 16px;}
+  .slot{min-height:120px;border-radius:18px;border:3px dashed var(--c);background:var(--cs);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:8px 6px;text-align:center;}
+  .slot .lbl{font-family:var(--display);font-size:16px;color:var(--c);margin-bottom:4px;}
+  .slot .fill{font-family:var(--body);font-size:15px;line-height:1.35;min-height:1.3em;word-break:keep-all;}
+  .slot.filled{border-style:solid;background:var(--paper);}
+
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .duo button{border-radius:22px;padding:18px 10px;font-family:var(--display);font-size:26px;border:4px solid;}
+  .duo .fact{color:var(--blue);border-color:#B7D4F5;background:var(--blue-soft);}
+  .duo .opin{color:var(--grape);border-color:#CFC6F2;background:var(--grape-soft);}
+
+  .quiz{font-family:var(--display);font-size:clamp(20px,4.6vw,26px);text-align:center;background:var(--blue-soft);border-radius:20px;padding:20px 14px;margin:6px 0 16px;line-height:1.45;}
+  .ox{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .ox button{border-radius:22px;padding:14px;font-family:var(--display);font-size:46px;border:4px solid;}
+  .ox .o{color:var(--blue);border-color:#B7D4F5;background:var(--blue-soft);}
+  .ox .x{color:var(--coral);border-color:#F7C0BA;background:var(--coral-soft);}
+
+  .feedback{min-height:56px;margin-top:14px;border-radius:16px;padding:10px 14px;text-align:center;font-size:19px;}
+  .feedback.good{background:var(--mint-soft);color:#0F6B65;}
+  .feedback.bad{background:var(--coral-soft);color:#B23B30;}
+  .feedback b{font-family:var(--display);font-weight:400;font-size:22px;}
+  .next{display:block;margin:12px auto 0;background:var(--ink);color:#fff;border-radius:16px;padding:10px 30px;font-family:var(--display);font-size:21px;}
+  .is-right{border-color:var(--good)!important;background:var(--mint-soft)!important;}
+  .is-wrong{border-color:var(--bad)!important;}
+  .shake{animation:shake .35s;}
+  @keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  .pop{animation:pop .4s;}
+  @keyframes pop{50%{transform:scale(1.06)}}
+
+  .clear{text-align:center;padding:10px 0;}
+  .clear .big{font-size:64px;line-height:1.1;}
+  .clear h2{font-size:30px;margin:6px 0;}
+  .clear p{color:var(--sub);margin:0 0 10px;}
+
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;}
+  .mcard{background:var(--paper);border:3px solid var(--line);border-radius:22px;padding:12px;text-align:center;}
+  .mcard svg{width:80px;height:80px;}
+  .mcard .nm{font-family:var(--display);font-size:20px;}
+  .mcard .sm{font-size:15.5px;color:var(--sub);line-height:1.5;}
+  .mcard .sm b{color:var(--blue);font-weight:400;font-family:var(--display);}
+  .mcard.locked{filter:grayscale(1);opacity:.45;}
+  .badge{margin-top:16px;background:linear-gradient(135deg,#DFEEFA,#DBF3F1 60%,#FFF5CF);border:3px solid #AEE3DF;border-radius:26px;padding:18px;text-align:center;}
+  .badge h3{font-size:26px;}
+  .badge .who{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px 0;}
+  .badge input{font-family:var(--display);font-size:22px;text-align:center;border:3px solid #AEE3DF;border-radius:14px;padding:6px 10px;width:min(220px,100%);background:#fff;color:var(--ink);}
+  .cert-img{display:block;width:100%;max-width:440px;height:auto;margin:12px auto 0;border-radius:18px;box-shadow:0 6px 20px rgba(20,60,80,.15);background:#fff;}
+  .save-cert{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--blue);color:#fff;border-radius:16px;padding:10px 24px;font-family:var(--display);font-size:21px;box-shadow:0 3px 0 #216a9f;}
+  .save-cert:active{transform:translateY(2px);box-shadow:none;}
+  .save-cert:disabled{opacity:.5;cursor:default;}
+  .cert-hint{font-size:15px;color:var(--sub);margin:8px 0 0;}
+  .reset{display:block;margin:18px auto 0;color:var(--sub);text-decoration:underline;font-size:15px;}
+
+  .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5;}
+  .confetti span{position:absolute;top:-40px;font-size:28px;animation:fall 1.8s ease-in forwards;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(300deg);}}
+
+  @media (max-width:520px){
+    .hero{grid-template-columns:1fr;}
+    .hero-art{display:none;}
+    .slot .fill{font-size:13.5px;}
+    .slot{min-height:112px;}
+    .pickbtn{font-size:21px;}
+  }
+  .credit{text-align:center;font-family:var(--display);font-size:15px;color:var(--sub);letter-spacing:0.03em;padding-block:0 28px;margin-top:-18px;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="s-warn" viewBox="0 0 100 100">
+      <path d="M50 14 L90 84 H10 Z" fill="#FFE27A" stroke="#E0A400" stroke-width="3.5" stroke-linejoin="round"/>
+      <rect x="45.5" y="38" width="9" height="26" rx="4.5" fill="#8A6400"/>
+      <circle cx="50" cy="72" r="5" fill="#8A6400"/>
+    </symbol>
+    <symbol id="s-rain" viewBox="0 0 100 100">
+      <path d="M30 56 a15 15 0 0 1 2-30 a19 19 0 0 1 36 5 a13 13 0 0 1 -3 25 Z" fill="#CFE0EC" stroke="#8FA9BC" stroke-width="2.5"/>
+      <g stroke="#3C8DDE" stroke-width="4.5" stroke-linecap="round"><path d="M35 64 L31 80"/><path d="M51 64 L47 82"/><path d="M67 64 L63 80"/></g>
+    </symbol>
+    <symbol id="s-wind" viewBox="0 0 100 100">
+      <g fill="none" stroke="#6C8A9C" stroke-width="6" stroke-linecap="round">
+        <path d="M14 34 H58 a10 10 0 1 0 -10 -10"/>
+        <path d="M14 52 H74 a9 9 0 1 1 -9 9"/>
+        <path d="M14 70 H50 a8 8 0 1 0 -8 8"/>
+      </g>
+    </symbol>
+    <symbol id="s-bolt" viewBox="0 0 100 100">
+      <path d="M30 22 a17 15 0 0 1 36 2 a13 13 0 0 1 -3 23 H34 a14 14 0 0 1 -4 -25 Z" fill="#CFE0EC" stroke="#8FA9BC" stroke-width="2.5"/>
+      <path d="M52 42 L40 70 H50 L44 90 L68 58 H55 L61 42 Z" fill="#F5B700" stroke="#D9A400" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="s-wave" viewBox="0 0 100 100">
+      <rect x="4" y="42" width="92" height="48" fill="#DCEFF8"/>
+      <g stroke="#2E86C8" stroke-width="5" fill="none" stroke-linecap="round">
+        <path d="M6 56 q12 -14 24 0 t24 0 t24 0 t24 0"/>
+        <path d="M6 74 q12 -14 24 0 t24 0 t24 0 t24 0"/>
+      </g>
+    </symbol>
+    <symbol id="s-house" viewBox="0 0 100 100">
+      <path d="M50 18 L86 48 H77 V84 H23 V48 H14 Z" fill="#DBF3F1" stroke="#179E97" stroke-width="3.2" stroke-linejoin="round"/>
+      <rect x="42" y="60" width="16" height="24" fill="#179E97"/>
+      <path d="M39 44 l8 8 l17 -17" fill="none" stroke="#179E97" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="s-map" viewBox="0 0 150 130">
+      <use href="#s-warn" x="2" y="6" width="66" height="66"/>
+      <use href="#s-rain" x="80" y="2" width="68" height="68"/>
+      <use href="#s-bolt" x="6" y="64" width="64" height="64"/>
+      <use href="#s-house" x="82" y="64" width="64" height="64"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="wrap" id="app" aria-live="polite"></main>
+<footer class="credit">@sososoop_notes</footer>
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script>
+(() => {
+  /* ---------- 학습 내용: 안전안내문자(재난 문자) ---------- */
+  const VOCAB = [
+    {w:'재난', mean:'뜻밖에 일어나 큰 피해를 주는 사고나 자연의 피해'},
+    {w:'강풍', mean:'매우 세게 부는 바람'},
+    {w:'호우', mean:'짧은 시간에 아주 많이 쏟아지는 비'},
+    {w:'낙하', mean:'높은 곳에서 아래로 떨어짐'},
+    {w:'전도', mean:'넘어지거나 엎어짐'},
+    {w:'낙뢰', mean:'벼락이 떨어짐'},
+    {w:'풍랑', mean:'바람이 불어 바다에 이는 거친 물결'},
+    {w:'대피', mean:'위험을 피해 안전한 곳으로 잠시 몸을 옮김'},
+    {w:'자제', mean:'하고 싶은 것을 스스로 참고 삼감'},
+    {w:'저지대', mean:'주변보다 낮은 땅. 비가 오면 물이 잘 고임'},
+  ];
+  const VOC = VOCAB.map(v => ({mean:v.mean, ans:v.w}));
+  const FILL = [
+    {pre:'지진이나 산불 같은', post:'이 나면 안전안내문자가 와요.', ans:'재난', ch:['재난','대피','관심']},
+    {pre:'매우 세게 부는 바람을', post:'(이)라고 해요.', ans:'강풍', ch:['강풍','호우','풍랑']},
+    {pre:'구조물이 넘어지는', post:'사고를 조심해요.', ans:'전도', ch:['전도','낙하','대피']},
+    {pre:'위험할 때는 안전한 곳으로', post:'해야 해요.', ans:'대피', ch:['대피','자제','낙뢰']},
+    {pre:'낮은 땅인', post:'에 물이 빠르게 차올라요.', ans:'저지대', ch:['저지대','해안가','들판']},
+    {pre:'번개가 칠 때는', post:'를 맞지 않게 조심해요.', ans:'낙뢰', ch:['낙뢰','강풍','호우']},
+  ];
+  const ORDERS = [
+    {steps:['재난 문자가 도착해요','내용을 끝까지 차분히 읽어요','위험한 곳을 피해요']},
+    {steps:['강풍이 불어요','간판·나무 아래를 피해요','안전한 건물로 들어가요']},
+    {steps:['비가 아주 많이 와요','저지대·물가를 피해요','높은 곳으로 대피해요']},
+  ];
+  const FO = [
+    {q:'안전안내문자 끝에는 보낸 기관이 적혀 있어요.', a:'fact', why:'확인할 수 있는 사실이에요.'},
+    {q:'재난 문자는 알림 소리가 너무 시끄러워요.', a:'opin', why:'느낌이라서 의견이에요.'},
+    {q:'강풍이 불면 간판이 떨어질 수 있어요.', a:'fact', why:'실제로 일어날 수 있는 사실이에요.'},
+    {q:'비 오는 날은 집에 있는 게 제일 좋아요.', a:'opin', why:'사람마다 다른 생각(의견)이에요.'},
+    {q:'낙뢰는 벼락이 떨어지는 것이에요.', a:'fact', why:'낱말의 뜻 그대로, 사실이에요.'},
+  ];
+  const OX = [
+    {q:'재난 문자가 오면 끝까지 차분히 읽어요.', a:true, why:'행동 요령까지 꼭 읽어야 해요.'},
+    {q:'강풍이 불 때 간판 아래에 서 있어도 돼요.', a:false, why:'간판이 떨어질 수 있어 위험해요.'},
+    {q:'비가 많이 올 때 저지대나 물가로 놀러 가요.', a:false, why:'물이 빠르게 차올라 위험해요.'},
+    {q:'낙뢰가 칠 때는 야외활동을 자제해요.', a:true, why:'번개를 맞을 수 있어 조심해야 해요.'},
+    {q:'위험할 때는 어른과 함께 안전한 곳으로 대피해요.', a:true, why:'혼자보다 어른과 함께가 안전해요.'},
+    {q:'풍랑특보가 내려도 배는 계속 나가도 돼요.', a:false, why:'거친 물결로 위험해 즉시 대피해야 해요.'},
+  ];
+  const STAGES = [
+    {id:'voc',   t:'낱말 뜻 찾기',   d:'뜻을 보고 알맞은 낱말 고르기',   c:'var(--mint)',  cs:'var(--mint-soft)',  n:VOC.length},
+    {id:'fill',  t:'빈칸 채우기',     d:'문장에 알맞은 낱말 넣기',         c:'var(--lemon)', cs:'var(--lemon-soft)', n:FILL.length},
+    {id:'order', t:'행동 순서 맞추기', d:'위험할 때 할 일을 차례대로',      c:'var(--coral)', cs:'var(--coral-soft)', n:ORDERS.length},
+    {id:'fo',    t:'사실일까 의견일까', d:'사실과 의견을 구별해요',          c:'var(--grape)', cs:'var(--grape-soft)', n:FO.length},
+    {id:'ox',    t:'안전 약속 O X',    d:'안전을 지키는 약속 알아보기',      c:'var(--blue)',  cs:'var(--blue-soft)',  n:OX.length},
+  ];
+
+  const fresh = () => ({view:'map', stage:0, q:0, stars:0, done:{}, best:{}, name:'', sound:true});
+  let state = fresh();
+  let round = null;
+  try { const saved = JSON.parse(localStorage.getItem('safety-explorer') || 'null'); if (saved) state = {...fresh(), ...saved, view:'map'}; } catch(e) {}
+  const save = () => { try { localStorage.setItem('safety-explorer', JSON.stringify(state)); } catch(e) {} };
+
+  let ac = null;
+  function tone(freqs, dur = 0.12) {
+    if (!state.sound) return;
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      freqs.forEach((f, i) => {
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type = 'sine'; o.frequency.value = f;
+        const t0 = ac.currentTime + i * dur;
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur * 1.6);
+        o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + dur * 1.7);
+      });
+    } catch(e) {}
+  }
+  const ding = () => tone([660, 880]);
+  const oops = () => tone([300, 240], 0.14);
+  const fanfare = () => tone([523, 659, 784, 1047], 0.13);
+
+  const $app = document.getElementById('app');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ic = (id, color) => `<svg viewBox="0 0 100 100"${color ? ` style="color:${color}"` : ''} aria-hidden="true"><use href="#s-${id}"/></svg>`;
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const stageDone = i => !!state.done[STAGES[i].id];
+
+  function confetti() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const box = document.getElementById('confetti');
+    const icons = ['⚠️','⭐','🌧️','✨','🏠'];
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement('span');
+      s.textContent = icons[i % icons.length];
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.animationDelay = Math.random() * 0.6 + 's';
+      box.appendChild(s);
+      setTimeout(() => s.remove(), 2600);
+    }
+  }
+
+  function topBar(showHome) {
+    return `<div class="bar">
+      ${showHome ? '<button class="home" data-act="map">🗺️ 안전 지도</button>' : ''}
+      <span class="spacer"></span>
+      <span class="stars" aria-label="모은 별">⭐ ${state.stars}</span>
+      <button class="sound" data-act="sound" aria-label="소리 켜기/끄기">${state.sound ? '🔊' : '🔈'}</button>
+    </div>`;
+  }
+
+  function renderMap() {
+    const doneCount = STAGES.filter((_, i) => stageDone(i)).length;
+    $app.innerHTML = `${topBar(false)}
+      <section class="hero">
+        <div>
+          <div class="kick">⚠️ 재난 안전 탐험대 출동!</div>
+          <h1>재난 문자, <span>똑똑하게</span> 읽기</h1>
+          <p>정거장 다섯 곳을 돌며 안전안내문자를 복습해요.</p>
+        </div>
+        <svg class="hero-art" viewBox="0 0 150 130" aria-hidden="true"><use href="#s-map"/></svg>
+      </section>
+      <nav class="trail" aria-label="정거장">
+        ${STAGES.map((s, i) => `
+          <button class="stop ${stageDone(i) ? 'done' : ''}" style="--c:${s.c};--cs:${s.cs}" data-act="stage" data-i="${i}">
+            <span class="num">${stageDone(i) ? '✓' : i + 1}</span>
+            <span class="txt"><span class="t disp">${s.t}</span><br><span class="d">${s.d}</span></span>
+            <span class="got">${state.best[s.id] != null ? `⭐ ${state.best[s.id]}/${s.n}` : `${s.n}문제`}</span>
+          </button>`).join('')}
+      </nav>
+      <button class="notebook-btn" data-act="notebook">📒 안전 수첩 보기 (${doneCount}/5 정거장)</button>`;
+  }
+
+  function shell(inner) {
+    const s = STAGES[state.stage];
+    $app.innerHTML = `${topBar(true)}
+      <section class="board" style="--c:${s.c};--cs:${s.cs}">
+        <div class="stage-head"><span class="tag">정거장 ${state.stage + 1}</span><h2>${s.t}</h2></div>
+        <div class="progress">${Array.from({length:s.n}, (_, i) => `<i class="${i < state.q ? 'on' : ''}"></i>`).join('')}</div>
+        ${inner}
+        <div class="feedback" id="fb"></div>
+      </section>`;
+  }
+
+  function renderStage() {
+    const s = STAGES[state.stage];
+    if (state.q >= s.n) return renderClear();
+    round = {tries:0, solved:false};
+    ({voc:renderVoc, fill:renderFill, order:renderOrder, fo:renderFO, ox:renderOX})[s.id]();
+  }
+
+  function right(msg, el) {
+    if (round.solved) return;
+    round.solved = true;
+    if (round.tries === 0) { state.stars++; round.star = true; }
+    ding();
+    if (el) el.classList.add('is-right', 'pop');
+    const fb = document.getElementById('fb');
+    fb.className = 'feedback good';
+    fb.innerHTML = `<b>딩동댕! ${round.star ? '⭐ +1' : ''}</b><br>${msg}<button class="next" data-act="next">다음 ▶</button>`;
+    document.querySelector('.stars').textContent = '⭐ ' + state.stars;
+    save();
+    fb.querySelector('.next').focus();
+  }
+  function wrong(msg, el) {
+    round.tries++;
+    oops();
+    if (el) { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake', 'is-wrong'); }
+    const fb = document.getElementById('fb');
+    fb.className = 'feedback bad';
+    fb.innerHTML = `<b>다시 해 볼까요?</b><br>${msg}`;
+  }
+
+  function renderVoc() {
+    const v = VOC[state.q];
+    const opts = shuffle([v.ans, ...shuffle(VOCAB.map(x=>x.w).filter(w=>w!==v.ans)).slice(0,2)]);
+    shell(`
+      <p class="ask">뜻을 읽고, <b>알맞은 낱말</b>을 골라요.</p>
+      <div class="means">"${esc(v.mean)}"</div>
+      <div class="picklist">${opts.map(o=>`<button class="pickbtn" data-act="voc" data-w="${esc(o)}">${esc(o)}</button>`).join('')}</div>`);
+  }
+
+  function renderFill() {
+    const f = FILL[state.q];
+    round.pieces = shuffle(f.ch);
+    shell(`
+      <p class="ask">문장을 읽고, 빈칸에 알맞은 <b>낱말</b>을 눌러요.</p>
+      <div class="sentence">${f.pre?esc(f.pre)+' ':''}<span class="blank" id="blank">　　</span> ${esc(f.post)}</div>
+      <div class="pieces">${round.pieces.map(p=>`<button class="piece" data-act="fill" data-w="${esc(p)}">${esc(p)}</button>`).join('')}</div>`);
+  }
+
+  function renderOrder() {
+    const o = ORDERS[state.q];
+    round.parts = o.steps;
+    round.order = shuffle([0,1,2]);
+    while (round.order.join() === '0,1,2') round.order = shuffle([0,1,2]);
+    round.filled = [];
+    drawOrder();
+  }
+  function drawOrder() {
+    const labels = ['처음','다음','마지막'];
+    const used = new Set(round.filled);
+    shell(`
+      <p class="ask">위험할 때 할 일을 <b>차례대로</b> 넣어요. 칸을 누르면 조각이 돌아와요.</p>
+      <div class="slots">${labels.map((lbl, i) => {
+        const p = round.filled[i];
+        return `<button class="slot ${p != null ? 'filled' : ''}" data-act="unslot" data-i="${i}" aria-label="${lbl} 칸">
+          <span class="lbl">${i+1}. ${lbl}</span><span class="fill">${p != null ? esc(round.parts[p]) : ''}</span></button>`;
+      }).join('')}</div>
+      <div class="pieces">${round.order.filter(p => !used.has(p)).map(p => `<button class="piece" style="font-size:16px;font-family:var(--body)" data-act="orderpick" data-p="${p}">${esc(round.parts[p])}</button>`).join('')}</div>`);
+  }
+
+  function renderFO() {
+    const f = FO[state.q];
+    shell(`
+      <p class="ask">이 문장은 <b>사실</b>일까요, <b>의견</b>일까요?</p>
+      <div class="quiz">"${esc(f.q)}"</div>
+      <div class="duo"><button class="fact" data-act="fo" data-v="fact">사실</button><button class="opin" data-act="fo" data-v="opin">의견</button></div>`);
+  }
+
+  function renderOX() {
+    const o = OX[state.q];
+    shell(`
+      <p class="ask">맞으면 <b>O</b>, 틀리면 <b>X</b>를 눌러요.</p>
+      <div class="quiz">${esc(o.q)}</div>
+      <div class="ox"><button class="o" data-act="ox" data-v="1" aria-label="맞아요 O">O</button><button class="x" data-act="ox" data-v="0" aria-label="틀려요 X">X</button></div>`);
+  }
+
+  function renderClear() {
+    const s = STAGES[state.stage];
+    const got = state.stageStars || 0;
+    state.done[s.id] = true;
+    state.best[s.id] = Math.max(state.best[s.id] || 0, got);
+    save();
+    fanfare(); confetti();
+    const next = state.stage < STAGES.length - 1;
+    $app.innerHTML = `${topBar(true)}
+      <section class="board clear" style="--c:${s.c};--cs:${s.cs}">
+        <div class="big">🎉</div>
+        <h2>정거장 ${state.stage + 1} 통과!</h2>
+        <p>이번 정거장에서 별 <b>${got}</b>개를 모았어요.</p>
+        ${next ? `<button class="next" data-act="stage" data-i="${state.stage + 1}">다음 정거장으로 ▶</button>` : `<button class="next" data-act="notebook">📒 안전 수첩 열기</button>`}
+        <button class="reset" data-act="map">안전 지도로 돌아가기</button>
+      </section>`;
+  }
+
+  function renderNotebook() {
+    const allDone = STAGES.every((_, i) => stageDone(i));
+    const cards = [
+      {ic:'warn',  nm:'안전안내문자', sm:'<b>행정안전부·시·도청</b>이<br>보내는 긴급 알림', need:'voc'},
+      {ic:'rain',  nm:'어떤 재난?',   sm:'<b>호우·강풍</b><br>지진·산불 등', need:'fill'},
+      {ic:'bolt',  nm:'왜 위험할까?', sm:'낙하물·저지대 침수<br><b>낙뢰</b> 등', need:'order'},
+      {ic:'wave',  nm:'위험한 곳',    sm:'해안가·방파제<br>공사장·<b>저지대</b>', need:'fo'},
+      {ic:'house', nm:'나의 행동',    sm:'차분히 읽고<br>안전한 곳으로 <b>대피</b>', need:'ox'},
+    ];
+    $app.innerHTML = `${topBar(true)}
+      <section class="board" style="--c:var(--ink);--cs:#EAF3F7">
+        <div class="stage-head"><h2>📒 나의 안전 수첩</h2></div>
+        <p class="ask">정거장을 통과하면 안전 카드가 하나씩 열려요.</p>
+        <div class="cards">${cards.map(c => {
+          const open = state.done[c.need];
+          return `<div class="mcard ${open ? '' : 'locked'}">${ic(c.ic)}<div class="nm">${open ? c.nm : '???'}</div><div class="sm">${open ? c.sm : '정거장을 통과하면 열려요'}</div></div>`;
+        }).join('')}</div>
+        ${allDone ? `
+        <div class="badge">
+          <h3>🏅 재난 안전 탐험대 대원증</h3>
+          <div class="who"><label for="who">대원 이름</label><input id="who" maxlength="10" value="${esc(state.name)}" placeholder="이름 쓰기"></div>
+          <img class="cert-img" id="certImg" alt="재난 안전 탐험대 대원증">
+          <div><button class="save-cert" id="saveCert" data-act="savecert" hidden>📥 대원증 이미지 저장</button></div>
+          <p class="cert-hint" id="certHint">대원증 그림을 길게 누르면(컴퓨터는 오른쪽 클릭) 이미지로 저장할 수 있어요.</p>
+        </div>` : `<p class="ask" style="text-align:center;margin-top:16px">정거장 다섯 곳을 모두 통과하면 <b>대원증</b>을 받아요!</p>`}
+        <button class="reset" data-act="reset">처음부터 다시 하기</button>
+      </section>`;
+    const who = document.getElementById('who');
+    if (who) {
+      let t = null;
+      who.addEventListener('input', () => { state.name = who.value; save(); clearTimeout(t); t = setTimeout(drawCert, 250); });
+      drawCert();
+      const btn = document.getElementById('saveCert'); if (btn) btn.hidden = false;
+    }
+  }
+
+  const CERT_W = 1080, CERT_H = 1350;
+  const CERT_ICONS = [
+    ['warn',  '재난 문자'],
+    ['rain',  '호우·강풍'],
+    ['bolt',  '낙뢰 주의'],
+    ['house', '안전하게'],
+  ];
+  const certFonts = Promise.all([
+    document.fonts ? document.fonts.load('80px "Jua"') : null,
+    document.fonts ? document.fonts.load('30px "Gowun Dodum"') : null,
+  ]).catch(() => {});
+  const icoImgs = {};
+  function icoImage(id) {
+    if (!icoImgs[id]) icoImgs[id] = new Promise(res => {
+      const sym = document.getElementById('s-' + id);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="400" height="400">${sym ? sym.innerHTML : ''}</svg>`;
+      const img = new Image();
+      img.onload = () => res(img); img.onerror = () => res(null);
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    });
+    return icoImgs[id];
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  let certCanvas = null, drawSeq = 0;
+  async function drawCert() {
+    const seq = ++drawSeq;
+    await certFonts;
+    const imgs = await Promise.all(CERT_ICONS.map(m => icoImage(m[0])));
+    if (seq !== drawSeq) return;
+    const D = '"Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
+    const B = '"Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif';
+    const c = document.createElement('canvas'); c.width = CERT_W; c.height = CERT_H;
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, CERT_W, CERT_H);
+    g.addColorStop(0, '#DFEEFA'); g.addColorStop(0.55, '#DBF3F1'); g.addColorStop(1, '#FFF5CF');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, CERT_W, CERT_H);
+    rrect(ctx, 60, 60, CERT_W - 120, CERT_H - 120, 48); ctx.fillStyle = '#FFFFFF'; ctx.fill();
+    ctx.setLineDash([18, 12]); ctx.lineWidth = 6; ctx.strokeStyle = '#7FC4E8'; ctx.stroke(); ctx.setLineDash([]);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    rrect(ctx, CERT_W / 2 - 210, 110, 420, 64, 32); ctx.fillStyle = '#DFEEFA'; ctx.fill();
+    ctx.fillStyle = '#2E86C8'; ctx.font = `34px ${D}`; ctx.fillText('재난 문자 읽기 탐험 완료!', CERT_W / 2, 155);
+    ctx.fillStyle = '#143040'; ctx.font = `86px ${D}`; ctx.fillText('재난 안전 탐험대 대원증', CERT_W / 2, 288);
+    const colW = (CERT_W - 160) / 4;
+    CERT_ICONS.forEach((m, i) => {
+      const cx = 80 + colW * i + colW / 2;
+      rrect(ctx, cx - 100, 340, 200, 200, 36); ctx.fillStyle = '#F2FAFD'; ctx.fill();
+      if (imgs[i]) ctx.drawImage(imgs[i], cx - 85, 352, 170, 170);
+      ctx.fillStyle = '#143040'; ctx.font = `30px ${D}`; ctx.fillText(m[1], cx, 592);
+    });
+    ctx.fillStyle = '#5B7585'; ctx.font = `34px ${D}`; ctx.fillText('대원 이름', CERT_W / 2, 720);
+    const nm = (state.name || '').trim() || '탐험대원';
+    let size = 120; ctx.font = `${size}px ${D}`;
+    while (ctx.measureText(nm).width > 760 && size > 50) { size -= 6; ctx.font = `${size}px ${D}`; }
+    ctx.fillStyle = '#2E86C8'; ctx.fillText(nm, CERT_W / 2, 850);
+    ctx.fillStyle = '#F5B700'; rrect(ctx, CERT_W / 2 - 300, 875, 600, 10, 5); ctx.fill();
+    rrect(ctx, CERT_W / 2 - 210, 925, 420, 84, 42); ctx.fillStyle = '#FFF5CF'; ctx.fill();
+    ctx.fillStyle = '#143040'; ctx.font = `44px ${D}`; ctx.fillText(`모은 별 ⭐ ${state.stars}개`, CERT_W / 2, 982);
+    rrect(ctx, 120, 1050, CERT_W - 240, 110, 30); ctx.fillStyle = '#DBF3F1'; ctx.fill();
+    ctx.fillStyle = '#0F6B65'; ctx.font = `36px ${D}`; ctx.fillText('"재난 문자를 끝까지 읽고 안전을 지키겠습니다!"', CERT_W / 2, 1118);
+    const d = new Date();
+    ctx.fillStyle = '#8A968F'; ctx.font = `28px ${B}`;
+    ctx.fillText(`${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`, CERT_W / 2, 1212);
+    ctx.fillStyle = '#9AA3AD'; ctx.font = `26px ${D}`; ctx.fillText('@sososoop_notes', CERT_W / 2, 1252);
+    certCanvas = c;
+    const img = document.getElementById('certImg');
+    if (img) img.src = c.toDataURL('image/png');
+  }
+  async function saveCert(btn) {
+    if (!certCanvas) return;
+    const hint = document.getElementById('certHint');
+    btn.disabled = true;
+    try {
+      const blob = await new Promise(r => certCanvas.toBlob(r, 'image/png'));
+      const nm = (state.name || '').trim().replace(/[\\/:*?"<>|]/g, '') || '탐험대원';
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `재난안전탐험대_대원증_${nm}.png`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      if (hint) hint.textContent = '대원증을 저장했어요! 🎉 저장이 안 되면 그림을 길게 눌러 저장해 주세요.';
+    } catch(e) {
+      if (hint) hint.textContent = '대원증 그림을 길게 눌러(컴퓨터는 오른쪽 클릭) 저장해 주세요.';
+    } finally { btn.disabled = false; }
+  }
+
+  function render() {
+    if (state.view === 'map') renderMap();
+    else if (state.view === 'notebook') renderNotebook();
+    else renderStage();
+    window.scrollTo({top:0});
+  }
+
+  $app.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const act = b.dataset.act;
+
+    if (act === 'map') { state.view = 'map'; return render(); }
+    if (act === 'notebook') { state.view = 'notebook'; return render(); }
+    if (act === 'sound') { state.sound = !state.sound; save(); b.textContent = state.sound ? '🔊' : '🔈'; return; }
+    if (act === 'savecert') return saveCert(b);
+    if (act === 'reset') { const keep = state.sound; state = fresh(); state.sound = keep; save(); return render(); }
+    if (act === 'stage') { state.view = 'stage'; state.stage = +b.dataset.i; state.q = 0; state.stageStars = 0; return render(); }
+    if (act === 'next') { if (round && round.star) state.stageStars = (state.stageStars || 0) + 1; state.q++; return render(); }
+    if (round && round.solved) return;
+
+    if (act === 'voc') {
+      const v = VOC[state.q];
+      if (b.dataset.w === v.ans) right(`<b style="color:var(--mint)">${esc(v.ans)}</b> — ${esc(v.mean)}`, b);
+      else wrong(`뜻을 한 번 더 읽어 봐요. 어떤 낱말이 어울릴까요?`, b);
+    }
+    if (act === 'fill') {
+      const f = FILL[state.q];
+      if (b.dataset.w === f.ans) {
+        const bl = document.getElementById('blank'); if (bl) bl.textContent = f.ans;
+        right(`${f.pre?esc(f.pre)+' ':''}<b style="color:var(--lemon)">${esc(f.ans)}</b> ${esc(f.post)}`, b);
+      } else wrong(`문장에 넣어 읽어 보면 어색해요. 다른 낱말을 골라 봐요.`, b);
+    }
+    if (act === 'orderpick') {
+      const i = round.filled.findIndex(v => v == null);
+      round.filled[i === -1 ? round.filled.length : i] = +b.dataset.p;
+      drawOrder();
+      if (round.filled.filter(v => v != null).length === 3) {
+        if (round.filled.join() === '0,1,2') right(`<b>차례 맞았어요!</b><br>${round.parts.map((p,i)=>`${i+1}. ${esc(p)}`).join('<br>')}`, document.querySelector('.slots'));
+        else wrong(`<b>처음 → 다음 → 마지막</b> 차례예요. 칸을 눌러 조각을 빼고 다시 넣어 봐요.`, document.querySelector('.slots'));
+      }
+    }
+    if (act === 'unslot') {
+      const i = +b.dataset.i;
+      if (round.filled[i] == null) return;
+      round.filled[i] = null;
+      drawOrder();
+    }
+    if (act === 'fo') {
+      const f = FO[state.q];
+      if (b.dataset.v === f.a) right(`${f.a==='fact'?'사실':'의견'}이에요! ${esc(f.why)}`, b);
+      else wrong(`눈으로 확인할 수 있으면 '사실', 생각이나 느낌이면 '의견'이에요.`, b);
+    }
+    if (act === 'ox') {
+      const o = OX[state.q];
+      const v = b.dataset.v === '1';
+      if (v === o.a) right(`${o.a ? 'O' : 'X'} 맞아요! ${esc(o.why)}`, b);
+      else wrong(`안전을 지키는 방법을 떠올려 봐요.`, b);
+    }
+  });
+
+  render();
+})();
+</script>
+</body></html>
